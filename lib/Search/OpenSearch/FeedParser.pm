@@ -64,11 +64,10 @@ sub parse {
     # if it is an object, stringify it
     my $xml = "$resp";
 
-    my $fields
-        = $self->fields || [qw( title id author link summary tags modified )];
+    my $fields = $self->fields || [qw( title id link summary modified )];
     my %feed;
     my $xfeed = XML::Feed->parse( \$xml );
-    if ( !$feed ) {
+    if ( !$xfeed ) {
         croak "invalid XML response: " . XML::Feed->errstr;
     }
 
@@ -125,12 +124,13 @@ sub parse {
     }
 
     # facets require digging into the raw xml
-    my $xml_feed = XMLin( $xfeed->as_xml, NoAttr => 1 );
+    my $xml_feed = XMLin( $xfeed->as_xml, NoAttr => 0 );
 
     #dump($xml_feed);
 
     # must turn facets inside out in order
     # to aggregate counts correctly
+    my %facets;
     if ( $xml_feed->{category}->{sos}->{facets} ) {
         my $facet_feed = $xml_feed->{category}->{sos}->{facets};
         for my $name ( keys %$facet_feed ) {
@@ -140,11 +140,18 @@ sub parse {
         }
     }
 
-    my $atom = $feed->{atom};
-    my $this_total = $atom->get( $OS_NS, 'totalResults' );
-
-    $feed{total}   = $this_total;
-    $feed{entries} = \@entries;
+    $feed{total}       = $xml_feed->{'opensearch:totalResults'};
+    $feed{query}       = $xml_feed->{'opensearch:Query'}->{searchTerms};
+    $feed{page_size}   = $xml_feed->{'opensearch:itemsPerPage'};
+    $feed{offset}      = $xml_feed->{'opensearch:startIndex'};
+    $feed{updated}     = $xml_feed->{updated};
+    $feed{title}       = $xml_feed->{title};
+    $feed{id}          = $xml_feed->{id};
+    $feed{build_time}  = $xml_feed->{category}->{sos}->{build_time};
+    $feed{search_time} = $xml_feed->{category}->{sos}->{search_time};
+    $feed{suggestions} = $xml_feed->{category}->{sos}->{suggestions};
+    $feed{facets}      = \%facets;
+    $feed{entries}     = \@entries;
     return Search::OpenSearch::Feed->new(%feed);
 }
 
