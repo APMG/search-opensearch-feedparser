@@ -114,7 +114,7 @@ sub parse {
 
         #dump $e;
         my $content = $item->content;
-        my $xfields = XMLin( $content->body, NoAttr => 1 );
+        my $xfields = XMLin( $content->body, NoAttr => 0 );
 
         #dump $fields;
 
