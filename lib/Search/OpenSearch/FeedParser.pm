@@ -22,10 +22,7 @@ Search::OpenSearch::FeedParser - parse Search::OpenSearch::Response::XML
 
 our $VERSION = '0.01';
 
-my $OS_NS = 'http://a9.com/-/spec/opensearch/1.1/';
-
-my $XMLer = Search::Tools::XML->new();
-
+my $XMLer       = Search::Tools::XML->new();
 my $XML_ESCAPER = Data::Transformer->new(
     normal => sub { local ($_) = shift; $$_ = $XMLer->escape($$_); } );
 
@@ -48,7 +45,25 @@ is a superset of the OpenSearch standard, this module implements a different API
 Instantiate a new FeedParser object. You can re-use a single FeedParser object to parse
 multiple responses.
 
+I<args> should be a hash of key/value pairs, including:
+
+=over
+
+=item debug I<bool>
+
+=item fields I<arrayref>
+
+=back
+
 =cut
+
+=head2 debug([I<bool>])
+
+Get/set the debug flag for the parser.
+
+=head2 fields
+
+Get/set the arrayref of field names the parser should expect in each response.
 
 =head2 parse( I<sos_response> )
 
