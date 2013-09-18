@@ -79,7 +79,8 @@ sub parse {
     # if it is an object, stringify it
     my $xml = "$resp";
 
-    my $fields = $self->fields || [qw( title id link summary modified )];
+    my $fields = $self->fields
+        || [qw( title id link summary modified tags category author issued )];
     my %feed;
     my $xfeed = XML::Feed->parse( \$xml );
     if ( !$xfeed ) {
