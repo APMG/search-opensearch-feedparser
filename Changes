@@ -1,5 +1,8 @@
 Revision history for Search-OpenSearch-Feed
 
+0.100 xxx
+ - port to Moo + Type::Tiny
+
 0.01 2013-09-18
  - First version, released on an unsuspecting world.
 

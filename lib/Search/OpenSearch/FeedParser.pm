@@ -1,8 +1,6 @@
 package Search::OpenSearch::FeedParser;
-
-use strict;
-use warnings;
-use base qw( Rose::ObjectX::CAF );
+use Moo;
+use Types::Standard qw( ArrayRef Bool );
 use Search::OpenSearch::Feed;
 use Carp;
 use Data::Dump qw( dump );
@@ -12,7 +10,15 @@ use Data::Transformer;
 use Search::Tools::XML;
 use Scalar::Util qw( blessed );
 
-__PACKAGE__->mk_accessors(qw( debug fields ));
+has 'debug' =>
+    ( is => 'rw', isa => Bool, default => sub { $ENV{SOS_DEBUG} || 0 } );
+has 'fields' => (
+    is      => 'rw',
+    isa     => ArrayRef,
+    default => sub {
+        [qw( title id link summary modified tags category author issued )];
+    },
+);
 
 =head1 NAME
 
@@ -20,7 +26,7 @@ Search::OpenSearch::FeedParser - parse Search::OpenSearch::Response::XML
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.100';
 
 my $XMLer       = Search::Tools::XML->new();
 my $XML_ESCAPER = Data::Transformer->new(
@@ -79,8 +85,7 @@ sub parse {
     # if it is an object, stringify it
     my $xml = "$resp";
 
-    my $fields = $self->fields
-        || [qw( title id link summary modified tags category author issued )];
+    my $fields = $self->fields;
     my %feed;
     my $xfeed = XML::Feed->parse( \$xml );
     if ( !$xfeed ) {

@@ -1,15 +1,22 @@
 package Search::OpenSearch::Feed;
-
-use strict;
-use warnings;
-use base qw( Rose::ObjectX::CAF );
+use Moo;
+use Types::Standard qw( HashRef ArrayRef Int Str Num );
 use Carp;
 
-our $VERSION = '0.01';
+our $VERSION = '0.100';
 
-__PACKAGE__->mk_accessors(
-    qw( entries total facets page_size offset query id title build_time search_time suggestions updated )
-);
+has 'entries'     => ( is => 'rw', isa => ArrayRef );
+has 'total'       => ( is => 'rw', isa => Int );
+has 'facets'      => ( is => 'rw', isa => HashRef );
+has 'page_size'   => ( is => 'rw', isa => Int );
+has 'offset'      => ( is => 'rw', isa => Int, default => sub {0} );
+has 'query'       => ( is => 'rw', isa => Str );
+has 'id'          => ( is => 'rw', isa => Str );
+has 'title'       => ( is => 'rw', isa => Str );
+has 'build_time'  => ( is => 'rw', isa => Num );
+has 'search_time' => ( is => 'rw', isa => Num );
+has 'suggestions' => ( is => 'rw', isa => HashRef );
+has 'updated'     => ( is => 'rw', isa => Str );
 
 =head1 NAME
 
