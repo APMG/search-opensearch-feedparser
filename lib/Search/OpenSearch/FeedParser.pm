@@ -26,7 +26,7 @@ Search::OpenSearch::FeedParser - parse Search::OpenSearch::Response::XML
 
 =cut
 
-our $VERSION = '0.100';
+our $VERSION = '0.101';
 
 my $XMLer       = Search::Tools::XML->new();
 my $XML_ESCAPER = Data::Transformer->new(

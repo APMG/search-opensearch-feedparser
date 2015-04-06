@@ -3,7 +3,7 @@ use Moo;
 use Types::Standard qw( HashRef ArrayRef Int Str Num Maybe );
 use Carp;
 
-our $VERSION = '0.100';
+our $VERSION = '0.101';
 
 has 'entries'     => ( is => 'rw', isa => ArrayRef );
 has 'total'       => ( is => 'rw', isa => Int );
