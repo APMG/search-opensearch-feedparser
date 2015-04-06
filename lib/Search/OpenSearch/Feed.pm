@@ -1,6 +1,6 @@
 package Search::OpenSearch::Feed;
 use Moo;
-use Types::Standard qw( HashRef ArrayRef Int Str Num );
+use Types::Standard qw( HashRef ArrayRef Int Str Num Maybe );
 use Carp;
 
 our $VERSION = '0.100';
@@ -13,9 +13,9 @@ has 'offset'      => ( is => 'rw', isa => Int, default => sub {0} );
 has 'query'       => ( is => 'rw', isa => Str );
 has 'id'          => ( is => 'rw', isa => Str );
 has 'title'       => ( is => 'rw', isa => Str );
-has 'build_time'  => ( is => 'rw', isa => Num );
-has 'search_time' => ( is => 'rw', isa => Num );
-has 'suggestions' => ( is => 'rw', isa => HashRef );
+has 'build_time'  => ( is => 'rw', isa => Maybe[Num] );
+has 'search_time' => ( is => 'rw', isa => Maybe[Num] );
+has 'suggestions' => ( is => 'rw', isa => Maybe[HashRef] );
 has 'updated'     => ( is => 'rw', isa => Str );
 
 =head1 NAME
