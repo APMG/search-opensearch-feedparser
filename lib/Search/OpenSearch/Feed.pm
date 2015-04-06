@@ -7,10 +7,10 @@ our $VERSION = '0.100';
 
 has 'entries'     => ( is => 'rw', isa => ArrayRef );
 has 'total'       => ( is => 'rw', isa => Int );
-has 'facets'      => ( is => 'rw', isa => HashRef );
+has 'facets'      => ( is => 'rw', isa => Maybe[HashRef] );
 has 'page_size'   => ( is => 'rw', isa => Int );
 has 'offset'      => ( is => 'rw', isa => Int, default => sub {0} );
-has 'query'       => ( is => 'rw', isa => Str );
+has 'query'       => ( is => 'rw', isa => Maybe[Str] );
 has 'id'          => ( is => 'rw', isa => Str );
 has 'title'       => ( is => 'rw', isa => Str );
 has 'build_time'  => ( is => 'rw', isa => Maybe[Num] );
