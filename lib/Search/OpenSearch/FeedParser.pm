@@ -187,7 +187,7 @@ Peter Karman, C<< <karman at cpan.org> >>
 =head1 BUGS
 
 Please report any bugs or feature requests to C<bug-search-opensearch-feed at rt.cpan.org>, or through
-the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Search-OpenSearch-Feed>.  I will be notified, and then you'll
+the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Search-OpenSearch-FeedParser>.  I will be notified, and then you'll
 automatically be notified of progress on your bug as I make changes.
 
 =head1 SUPPORT
@@ -203,19 +203,19 @@ You can also look for information at:
 
 =item * RT: CPAN's request tracker (report bugs here)
 
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Search-OpenSearch-Feed>
+L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Search-OpenSearch-FeedParser>
 
 =item * AnnoCPAN: Annotated CPAN documentation
 
-L<http://annocpan.org/dist/Search-OpenSearch-Feed>
+L<http://annocpan.org/dist/Search-OpenSearch-FeedParser>
 
 =item * CPAN Ratings
 
-L<http://cpanratings.perl.org/d/Search-OpenSearch-Feed>
+L<http://cpanratings.perl.org/d/Search-OpenSearch-FeedParser>
 
 =item * Search CPAN
 
-L<http://search.cpan.org/dist/Search-OpenSearch-Feed/>
+L<http://search.cpan.org/dist/Search-OpenSearch-FeedParser/>
 
 =back
 
